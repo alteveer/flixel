@@ -50,16 +50,21 @@ package org.flixel
 		/**
 		 * Gets / sets the angle of this vector. Changing the angle changes the x and y but retains the same length.
 		 */
-		public static function setAngle(p:FlxPoint, value:Number):FlxPoint
+		public static function setAngle(p:FlxPoint, degrees:Number):FlxPoint
 		{
 			var len:Number = getLength(p);
-			p.x = -cos(value * DEG2RAD) * len;
-			p.y = -sin(value * DEG2RAD) * len;
+			p.x = -cos(degrees * DEG2RAD) * len;
+			p.y = -sin(degrees * DEG2RAD) * len;
 			return p
 		}
-		public static function getAngle(p:FlxPoint):Number
-		{
+		public static function getAngle(p:FlxPoint):Number {
 			return atan2(p.y, p.x)
+		}
+		
+		public static function rotate(P:FlxPoint, degrees:Number):FlxPoint {
+			var orig_angle:Number = getAngle(P)
+			//trace(orig_angle)
+			return setAngle(FlxV.clone(P), (orig_angle * RAD2DEG) + degrees)
 		}
 		
 		/**
