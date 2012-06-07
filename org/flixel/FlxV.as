@@ -18,6 +18,9 @@ package org.flixel
 		private static var acos:Function = Math.acos
 		private static var atan2:Function = Math.atan2
 
+		public static const DEG2RAD:Number = (Math.PI / 180)
+		public static const RAD2DEG:Number = (180 / Math.PI)
+
 		public static function clone(p:FlxPoint):FlxPoint {
 			return new FlxPoint(p.x, p.y)
 		}
@@ -47,15 +50,21 @@ package org.flixel
 		/**
 		 * Gets / sets the angle of this vector. Changing the angle changes the x and y but retains the same length.
 		 */
-		public static function setAngle(p:FlxPoint, value:Number):void
+		public static function setAngle(p:FlxPoint, degrees:Number):FlxPoint
 		{
 			var len:Number = getLength(p);
-			p.x = cos(value) * len;
-			p.y = sin(value) * len;
+			p.x = -cos(degrees * DEG2RAD) * len;
+			p.y = -sin(degrees * DEG2RAD) * len;
+			return p
 		}
-		public static function getAngle(p:FlxPoint):Number
-		{
-			return atan2(p.y, p.x);
+		public static function getAngle(p:FlxPoint):Number {
+			return atan2(p.y, p.x)
+		}
+		
+		public static function rotate(P:FlxPoint, degrees:Number):FlxPoint {
+			var orig_angle:Number = getAngle(P)
+			//trace(orig_angle)
+			return setAngle(FlxV.clone(P), (orig_angle * RAD2DEG) + degrees)
 		}
 		
 		/**
