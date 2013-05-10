@@ -603,8 +603,10 @@ package org.flixel.plugin.photonstorm
 			
 			if (snapOnDrag)
 			{
-				x = int(Math.floor(x / snapX) * snapX);
-				y = int(Math.floor(y / snapY) * snapY);
+				trace(x, y)
+				x = int(Math.round(x / snapX) * snapX);
+				y = int(Math.round(y / snapY) * snapY);
+				trace(x, y)
 			}
 		}
 		
@@ -760,8 +762,8 @@ package org.flixel.plugin.photonstorm
 			
 			if (snapOnRelease)
 			{
-				x = int(Math.floor(x / snapX) * snapX);
-				y = int(Math.floor(y / snapY) * snapY);
+				x = int(Math.round(x / snapX) * snapX);
+				y = int(Math.round(y / snapY) * snapY);
 			}
 		}
 		
