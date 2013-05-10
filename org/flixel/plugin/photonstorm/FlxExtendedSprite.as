@@ -703,6 +703,12 @@ package org.flixel.plugin.photonstorm
 				dragOffsetX = (frameWidth / 2);
 				dragOffsetY = (frameHeight / 2);
 			}
+			
+			if (mouseStartDragCallback is Function)
+			{
+				mouseStartDragCallback.apply(null, [ this, mouseX, mouseY ] );
+			}
+
 		}
 		
 		/**
@@ -764,6 +770,11 @@ package org.flixel.plugin.photonstorm
 			{
 				x = int(Math.round(x / snapX) * snapX);
 				y = int(Math.round(y / snapY) * snapY);
+			}
+			
+			if (mouseStopDragCallback is Function)
+			{
+				mouseStopDragCallback.apply(null, [ this, mouseX, mouseY ] );
 			}
 		}
 		
